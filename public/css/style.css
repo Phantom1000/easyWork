@@ -332,20 +332,8 @@ footer{
 
 /* -----------фщрма регистраци------- */
 #form-wrap{
-	width: 400px;
-	text-align: center;
-	background: #e8e8e8;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	border-radius: 10px;	
-	border: 1px solid black;
+	padding-top: 100px;
 	z-index: 150;
-	position: absolute;
-	left: 34%;
-	right: 35%;
-	top: 15%;
-	bottom: 15%;
-	/* display: none */;	
 }
 #gray{
 	background-color: rgba(1,1,1,0.8);
@@ -361,20 +349,8 @@ footer{
 #gray:target {display: block;}
 
 #form-wrap1{
-	width: 400px;
-	text-align: center;
-	background: #e8e8e8;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	border-radius: 10px;	
-	border: 1px solid black;
-	z-index: 150;
-	position: absolute;
-	left: 34%;
-	right: 35%;
-	top: 15%;
-	bottom: 15%;
-	/* display: none */;	
+	padding-top: 100px;
+	z-index: 150;	
 }
 #gray1{
 	background-color: rgba(1,1,1,0.8);
@@ -398,7 +374,35 @@ input{
 } 
 
 #form-wrap button{
-	margin-top: 75px;
+	background-color: white;
+	display: inline-block;
+	color: black;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .5em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 10px;
+    transition: 0.2s;
+    width: 200px;
+    margin-top: 70px;
+}
+
+#form-wrap1 button{
+	background-color: white;
+	display: inline-block;
+	color: black;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .5em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 10px;
+    transition: 0.2s;
+    width: 200px;
+    margin-top: 70px;
 }
 
 .close{
@@ -410,3 +414,17 @@ input{
 }
 
 .close:hover {background: #e6e6ff;}
+
+.form-group{
+	padding-left: 20px;
+}
+
+.form-group a{
+	margin-top: 70px;
+	padding-left: 30px;
+}
+
+.test77{
+	margin-top: 70px;
+	padding-left: 284px;
+}

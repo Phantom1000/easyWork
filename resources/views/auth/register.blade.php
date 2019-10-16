@@ -65,6 +65,10 @@
                                 </button>
                             </div>
                         </div>
+
+                         <a class="btn btn-link test77" href="{{ route('password.request') }}">
+                            {{ __('close the window') }}
+                        </a>
                     </form>
                 </div>
             </div>
