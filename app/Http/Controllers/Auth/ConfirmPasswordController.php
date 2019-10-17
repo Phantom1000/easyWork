@@ -28,10 +28,6 @@ class ConfirmPasswordController extends Controller
      */
 
     //protected $redirectTo = '/';
-    protected function redirectTo(){
-        return url()->previous();
-    }
-
     /**
      * Create a new controller instance.
      *
@@ -40,5 +36,6 @@ class ConfirmPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->redirectTo = url()->previous();
     }
 }

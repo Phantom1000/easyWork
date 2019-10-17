@@ -27,10 +27,9 @@ class LoginController extends Controller
      * @var string
      */
 
-    //protected $redirectTo = '/';
-
-    protected function redirectTo(){
-        return url()->previous();
+    public function username()
+    {
+        return 'name';
     }
 
     /**
@@ -40,7 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = url()->previous();
         $this->middleware('guest')->except('logout');
+        $this->redirectTo = url()->previous();
     }
 }

@@ -28,7 +28,7 @@
 				<div class="navbar">
 					<ul>
 						<li>
-							<a href="index.html">Главная</a>
+							<a href="{{ route('index') }}">Главная</a>
 						</li>
 						<li>
 							<a href="exchange.html">Биржа</a>

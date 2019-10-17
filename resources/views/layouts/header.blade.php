@@ -16,7 +16,7 @@
         @else
             <div class="row">
                 <div class="col-lg-12 col-6">
-                    <a href="{{ route('profile') }}">Личный кабинет</a>
+                    <a href="{{ route('profile', Auth::user()) }}">Личный кабинет</a>
                 </div>
             </div>
             <div class="row">

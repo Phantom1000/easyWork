@@ -13,14 +13,14 @@
 
 Route::get('/', function () {
     return view('index');
-});
-
-Route::get('/#gray1', function () {
-    return view('index');
-})->name('backLogin');
+})->name('index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/profile', 'ProfileController@index')->middleware('auth')->name('profile');
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
+
+Route::get('/profile/{user}/edit', 'ProfileController@edit')->middleware('auth')->name('profile.edit');
+
+Route::put('/profile/{user}', 'ProfileController@update')->middleware('auth')->name('profile.update');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,9 +32,7 @@ class RegisterController extends Controller
      */
 
     //protected $redirectTo = '/';
-    protected function redirectTo() {
-        return url()->previous();
-    }
+
     /**
      * Create a new controller instance.
      *
@@ -42,6 +41,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->redirectTo = url()->previous();
     }
 
     /**
@@ -67,10 +67,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $role = 1;
+        if ($data['role'] == 'employer') $role = Role::where('title', 'Работодатель')->first();
+        if ($data['role'] == 'freelancer') $role = Role::where('title', 'Фрилансер')->first();
+        $user->roles()->attach([
+            'role_id' => $role->id,
+        ]);
+        return $user;
     }
 }
