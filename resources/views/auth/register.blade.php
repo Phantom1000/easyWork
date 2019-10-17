@@ -81,7 +81,7 @@
                             </div>
                         </div>
 
-                         <a class="btn btn-link test77" href="{{ url()->previous() }}">
+                         <a class="btn btn-link test77" href="{{ url()->current() }}">
                             {{ __('Закрыть окно') }}
                         </a>
                     </form>
