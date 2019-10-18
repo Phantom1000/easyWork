@@ -32,6 +32,12 @@ button:hover{
 	background: rgba(255,255,255,.2);
 }
 
+textarea{
+	margin-bottom: 60px;
+	margin-top: 0px;
+}
+
+
 /* Верхняя строка */
 header{
 	padding-top: 20px;
@@ -187,96 +193,39 @@ footer{
 /* ------------страница с личным кабинетом-------- */
 
 /*  person */
-.toop{
-	display: flex;
-	justify-content: space-around;
+.desk{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	border-radius: 10px;
+	background: #e8e8e8;
+	margin-bottom: 30px;
 }
 
 .teext{
-	position: absolute;
-	z-index: 1;
-	left: 430px;
-	top: 130px;
+
 }
 
 .portfolio{
-	width: 950px;
-	position: absolute;
-	z-index: 1;
-	top: 400px;
-	right: 160px;
-	text-align: justify;
+	padding-left: 80px;
 }
 
 .my_foto{
 	height: 240px;
 	width: 220px;
-	position: absolute;
-	z-index: 1;
-	left: 134px;
-	top: 114px;
 }
 
 .comments{
-	width: 950px;
-	position: absolute;
-	z-index: 1;
-	top: 680px;
-	right: 160px;
-	text-align: justify;
+	padding-left: 80px;
 }
 
 .foto{
-	text-align: center;	
+	padding-left: 80px;
 }
 
 .Me{
 	background-color: white;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	height:1000px;
-}
-
-#rectangle1 { 
-	height: 260px;
-	width: 240px;
-	background: #e8e8e8; 
-	border-radius: 4px;
-	position: absolute;
-	z-index: 0;	
-	right: 900px;
-}
-
-#rectangle2 { 
-	width: 780px;
-	height: 260px;
-	background: #e8e8e8; 
-	border-radius: 4px;
-	position: absolute;
-	z-index: 0;	
-	right: 100px;
-}
-
-#rectangle3 { 
-	width: 1040px;
-	height: 260px;
-	background: #e8e8e8; 
-	border-radius: 4px;
-	position: absolute;
-	z-index: 0;	
-	right: 100px;
-	top: 380px;
-}
-
-#rectangle4 { 
-	width: 1040px;
-	height: 260px;
-	background: #e8e8e8; 
-	border-radius: 4px;
-	position: absolute;
-	z-index: 0;	
-	right: 100px;
-	top: 655px;
 }
 
 .comments span{
@@ -284,9 +233,22 @@ footer{
 }
 
 .one{
-	padding-bottom: 20px;
+
 }
 
+/* редактрование анкеты */
+
+.Me h3{
+	text-align: center;
+}
+
+.btn-yes{
+	width: 200px;	
+}
+
+.rightt{
+	text-align: center;
+}
 /* ----------стриница с заказом---------- */
 .works{
 	background: white;

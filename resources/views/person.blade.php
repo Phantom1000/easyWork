@@ -3,42 +3,36 @@
 @section('content')
 	<section class="Me">
 		<div class="container">
-			<div class="toop">
-				<div class=" foto">
+			<div class="row desk">
+				<div class="col-lg-4 foto">
 					<img src="{{ $avatar }}" class="my_foto" alt="">
 				</div>
-				<div class="teext">
+				<div class="col-lg-5 teext">
 					<h2>{{ $name }}</h2><br>
 					<span>{{ $short_description }}</span>
 					@if (Auth::user() == $user)
 						<a href="{{ route('profile.edit', $user) }}" style="color:red">Редактировать профиль</a>
 					@endif
 				</div>
-			
-				
-				<div id="rectangle1"></div>
-				<div id="rectangle2"></div>
 			</div>
-			<div>
-				<div class="portfolio">
+			<div class="row desk">
+				<div class="co-lg-12 portfolio">
 					<h3>Портфолио</h3> <br>
 					<span>{{ $description }}</span>
 				</div>
-				<div id="rectangle3"></div>
 			</div>	
-			<div>
+			<div class="row desk">
 				<div class="comments">
 					<h3>Оценки от заказчиков:</h3> <br>
 					<div class="one">
-						<span>Пупа и Лупа "sex shop"</span>
-						<span>- Всё было охуенно!!!</span>
+						<span></span>
+						<span></span>
 					</div>
 					<div class="one">
-						<span>Саня "оргтехника "</span>
-						<span>- Ебать профи!!</span>
+						<span></span>
+						<span></span>
 					</div>
 				</div>
-				<div id="rectangle4"></div>
 			</div>	
 		</div>
 	</section>

@@ -6,24 +6,30 @@
         {{ method_field('PUT') }}
         <section class="Me">
             <div class="container">
-                <div class="toop">
-                    <input type="file" class="form-control-file" name="avatar" />
-                    <div class="teext">
-                        <h2>{{ $name }}</h2><br>
-                        <textarea name="short_description" id="short_description" cols="30" rows="10" class="form-control">{{ $short_description }}</textarea>
+                <div class="row">
+                      <input type="file" class="col-lg-12 form-control-file" name="avatar" />
+                    <div class="row">
+                        <div class="col-lg-12 teext">
+                            <h2>{{ $name }} о себе</h2>
+                            <div class="row">
+                                <textarea name="short_description" id="short_description" cols="30" rows="10" class="col-lg-12  form-control">{{ $short_description }}</textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div id="rectangle1"></div>
-                    <div id="rectangle2"></div>
                 </div>
-                <div>
-                    <div class="portfolio">
-                        <h3>Портфолио</h3> <br>
-                        <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ $description }}</textarea>
+                <div class="row">
+                    <h3 class="col-lg-12">Портфолио</h3>
+                    <div class="row">
+                        <textarea name="description" id="description" cols="300" rows="10" class="col-lg-12 form-control">{{ $description }}</textarea>
                     </div>
-                    <div id="rectangle3"></div>
                 </div>
             </div>
-            <button type="submit" class="btn-success">Сохранить изменения</button>
-        </form>
-	</section>
+            <div class="row">
+                <div class="col-lg-12 rightt">
+                    <button type="submit" class="btn-yes">Сохранить изменения</button>
+                </div>
+            </div>
+        </section>
+    </form>
+
 @endsection
