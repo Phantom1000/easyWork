@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Role;
+use App\Order;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +20,12 @@ class DatabaseSeeder extends Seeder
         Role::create(
             ['title' => 'Фрилансер'],
         );
+
+        $test = new Order();
+        $test->title = 'Практика Сыча';
+        $test->description = 'Сделать биржу труда';
+        $test->employer_id = 4;
+        $test->accept = false;
+        $test->save();
     }
 }

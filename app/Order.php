@@ -1,0 +1,20 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    protected $fillable = [
+        'title', 'description', 'employer_id', 'freelancer_id', 'accept'
+    ];
+
+    public function employer() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function freelancer() {
+        return $this->belongsTo('App\User');
+    }
+}

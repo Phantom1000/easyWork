@@ -1,13 +1,16 @@
-    <form action="{{ route('profile.update', $user) }}" method="POST" enctype="multipart/form-data" class="form-group">
+@extends('layouts.layout')
+@include('layouts.header')
+@section('content')
+    <form action="{{ route('order.store') }}" method="POST" class="form-group">
+        {{ csrf_field() }}
         <section class="Me">
             <div class="container">
                 <div class="row">
-                    <input type="file" class="col-lg-12 form-control-file" name="avatar" />
                     <div class="row">
                         <div class="col-lg-12 teext">
                             <h2>Краткое описание работы</h2>
                             <div class="row">
-                                <textarea name="short_description" id="short_description" cols="30" rows="10" class="col-lg-12  form-control"></textarea>
+                                <textarea name="title" id="short_description" cols="30" rows="10" class="col-lg-12 form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -26,3 +29,4 @@
             </div>
         </section>
     </form>
+@endsection

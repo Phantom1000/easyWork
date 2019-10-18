@@ -31,7 +31,7 @@
 							<a href="{{ route('index') }}">Главная</a>
 						</li>
 						<li>
-							<a href="exchange.html">Биржа</a>
+							<a href="{{ route('order.index') }}">Биржа</a>
 						</li>
 						<li>
 							<a href="faq.html">FAQ</a>

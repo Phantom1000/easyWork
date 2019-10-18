@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row desk">
 				<div class="col-lg-4 foto">
-					<img src="{{ $avatar }}" class="my_foto" alt="">
+					<img src="@isset($avatar) {{ asset('/storage/' . $avatar) }} @endisset" class="my_foto" alt="">
 				</div>
 				<div class="col-lg-5 teext">
 					<h2>{{ $name }}</h2><br>

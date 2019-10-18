@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProfilePolicy
+class OrderPolicy
 {
     use HandlesAuthorization;
 
@@ -19,4 +19,8 @@ class ProfilePolicy
         //
     }
 
+    public function update(User $user)
+    {
+        return $user->id == 5;
+    }
 }
