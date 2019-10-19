@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Gate;
@@ -24,8 +25,16 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('exchange', [
+        return view('orders.index', [
             'orders' => $this->orders->all(),
+            'change' => false
+        ]);
+    }
+
+    public function myOrders(Request $request) {
+        return view('orders.index', [
+            'orders' => $this->orders->forUser($request->user()),
+            'change' => true
         ]);
     }
 
@@ -37,7 +46,9 @@ class OrderController extends Controller
     public function create()
     {
         if (Gate::allows('create-order')) {
-            return view('create');
+            return view('orders.create', [
+                'order' => null
+            ]);
         }
         else {
             abort(403);
@@ -58,7 +69,7 @@ class OrderController extends Controller
             'employer_id' => $request->user()->id,
             'accept' => false
         ]);
-        return redirect()->route('order.index');
+        return redirect()->route('order.my');
     }
 
     /**
@@ -69,7 +80,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.order', [
+            'order' => $order,
+            'employer' => User::find($order->employer_id)
+        ]);
     }
 
     /**
@@ -80,7 +94,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('orders.edit', [
+            'order' => $order
+        ]);
     }
 
     /**
@@ -92,7 +108,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->update($request->all());
+        return redirect()->route('order.my');
     }
 
     /**
@@ -103,6 +120,11 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        /*if (Gate::allows('delete-order', $order)) {*/
+            $order->delete();
+            return redirect()->route('order.my');
+        /*} else {
+            abort(403);
+        }*/
     }
 }

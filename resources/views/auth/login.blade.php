@@ -61,10 +61,10 @@
                                 @endif
 
                                 @if (Route::has('register'))
-                                    <a class="btn btn-link" href="{{ url()->current() . '/#gray' }}">{{ __('Регистрация') }}</a>
+                                    <a class="btn btn-link" href="{{ url()->current() . '#gray' }}">{{ __('Регистрация') }}</a>
                                 @endif
 
-                                <a class="btn btn-link" href="{{ url()->current() }}">
+                                <a class="btn btn-link" href="{{ url()->previous() }}">
                                     {{ __('Закрыть окно') }}
                                 </a> 
                             </div>

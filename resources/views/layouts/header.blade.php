@@ -3,13 +3,13 @@
         @guest
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="{{ url()->current() . '/#gray1' }}">Войти</a>
+                    <a href="{{ url()->current() . '#gray1' }}">Войти</a>
                 </div>
             </div>
             @if (Route::has('register'))
                 <div class="row">
                     <div class="col-lg-12">
-                        <a href="{{ url()->current() . '/#gray' }}">Регистрация</a>
+                        <a href="{{ url()->current() . '#gray' }}">Регистрация</a>
                     </div>
                 </div>
             @endif
@@ -17,6 +17,11 @@
             <div class="row">
                 <div class="col-lg-12 col-6">
                     <a href="{{ route('profile', Auth::user()) }}">Личный кабинет</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-6">
+                    <a href="{{ route('order.my') }}">Мои заказы</a>
                 </div>
             </div>
             <div class="row">

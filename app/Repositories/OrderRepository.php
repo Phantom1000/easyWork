@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Order;
+use App\User;
 
 class OrderRepository
 {
@@ -14,6 +15,10 @@ class OrderRepository
      */
     public function all()
     {
-        return Order::orderBy('created_at', 'asc')->get();
+        return Order::orderBy('created_at', 'desc')->paginate(10);
+    }
+
+    public function forUser(User $user) {
+        return Order::orderBy('created_at', 'desc')->where('employer_id', $user->id)->paginate(10);
     }
 }

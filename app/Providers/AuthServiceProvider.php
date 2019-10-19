@@ -34,5 +34,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-order', function ($user) {
             return ($user->roles->where('title', 'Работодатель')->first() != null);
         });
+
+        Gate::define('delete-order', function ($user, $order) {
+            return $user->id == $order->employer_id;
+        });
     }
 }
