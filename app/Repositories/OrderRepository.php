@@ -21,4 +21,8 @@ class OrderRepository
     public function forUser(User $user) {
         return Order::orderBy('created_at', 'desc')->where('employer_id', $user->id)->paginate(10);
     }
+
+    public function applications(User $user) {
+        return Order::orderBy('created_at', 'desc')->whereNotNull('freelancer_id')->where('accept', false)->paginate(10);
+    }
 }

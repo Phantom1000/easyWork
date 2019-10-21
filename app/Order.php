@@ -11,10 +11,10 @@ class Order extends Model
     ];
 
     public function employer() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'employer_id');
     }
 
     public function freelancer() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'freelancer_id');
     }
 }

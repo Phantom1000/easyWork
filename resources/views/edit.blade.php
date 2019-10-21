@@ -1,11 +1,13 @@
 @extends('layouts.layout')
-@include('layouts.header')
+@section('title', 'Редактирование профиля')
 @section('content')
+    @include('layouts.header')
+    @include('layouts.menu')
     <section class="Me">
         <div class="container">
             <form action="{{ route('profile.update', $user) }}" method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                {{ method_field('PUT') }}
+                @csrf
+                @method('PUT')
                 <div class="row">
                     <input type="file" class="col-lg-12 form-control-file" name="avatar" />
                     <div class="row">

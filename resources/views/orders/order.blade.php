@@ -1,6 +1,8 @@
 @extends('layouts.layout')
-@include('layouts.header')
+@section('title', '{{ $order->title }}')
 @section('content')
+	@include('layouts.header')
+    @include('layouts.menu')
     <section class="main_order">
     	<div class="container">
 	    	<div class="row test11">

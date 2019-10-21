@@ -7,11 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-	<title>Work Assasin</title>
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -21,27 +20,6 @@
 
 </head>
 <body>
-
-	<!-- меню -->
-	<section class="menu">
-		<div class="container">
-			<nav class="row justify-content-center">
-				<div class="navbar">
-					<ul>
-						<li>
-							<a href="{{ route('index') }}">Главная</a>
-						</li>
-						<li>
-							<a href="{{ route('order.index') }}">Биржа</a>
-						</li>
-						<li>
-							<a href="faq.html">FAQ</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-    </section>
 
 	@yield('content')
 

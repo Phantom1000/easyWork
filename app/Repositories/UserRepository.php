@@ -18,4 +18,5 @@ class UserRepository
             ->orderBy('created_at', 'asc')
             ->get();
     }
+
 }
