@@ -4,7 +4,9 @@
 	@include('layouts.header')
     @include('layouts.menu')
 	@if ($change)
-		<a class="dvig" href="{{ route('order.create') }}" class="btn-link"><i class="fa fa-plus">Добавить заказ</i></a>
+		@if ($isEmployer)
+			<a class="dvig" href="{{ route('order.create') }}" class="btn-link"><i class="fa fa-plus">Добавить заказ</i></a>
+		@endif
 	@endif
 	@forelse ($orders as $order)
 		<section class="order">
@@ -17,11 +19,11 @@
 			<div class=" order_text">
 				<div class="order_text1">
 					<span>{{ $order->description }}</span>
-					<a style="padding-right: 15px;" href="{{ route('profile', $order->employer_id) }}">Заказчик</a>
-					<a href="{{ route('application.create', $order) }}">Подать заявку</a>
+					<a style="padding-right: 15px;" href="{{ route('profile', $order->employer) }}">Заказчик</a>
+					@if (!$change && !$isEmployer) <a href="{{ route('application.create', $order) }}">Подать заявку</a> @endif
 				</div>
 				<a href="{{ route('order.show', $order) }}" style="color:blue; margin-right: 10px">Подробнее</a>
-				@if ($change)
+				@if ($change && $isEmployer)
 					<a href="{{ route('order.edit', $order) }}" style="color:blue; padding-right: 20px; ">Редактировать</a>
 					<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
 						@csrf

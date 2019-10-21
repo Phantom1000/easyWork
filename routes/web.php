@@ -45,9 +45,9 @@ Route::get('/application/{order}/create', 'ApplicationController@create')->middl
 
 Route::get('/application', 'ApplicationController@index')->middleware('auth')->name('application.index');
 
-Route::put('/application/{order}/accept', 'ApplicationController@accept')->middleware('auth', 'can:update,order')->name('application.accept');
+Route::put('/application/{application}', 'ApplicationController@accept')->middleware('auth')->name('application.accept');
 
-Route::put('/application/{order}/cancel', 'ApplicationController@cancel')->middleware('auth', 'can:update,order')->name('application.cancel');
+Route::delete('/application/{application}', 'ApplicationController@destroy')->middleware('auth')->name('application.destroy');
 
 Route::get('test/{check}', function($check) {
     return view('test', [

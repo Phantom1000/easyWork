@@ -12,11 +12,9 @@ class UserRepository
      * @param  User  $user
      * @return Collection
      */
-    public function forUser(User $user)
-    {
-        return $user->tasks()
-            ->orderBy('created_at', 'asc')
-            ->get();
+
+    public function getRole() {
+        
     }
 
 }

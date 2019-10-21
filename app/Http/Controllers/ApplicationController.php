@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use App\Order;
 
+use App\Application;
+
 class ApplicationController extends Controller
 {
     protected $orders;
@@ -18,34 +20,40 @@ class ApplicationController extends Controller
     }
  
     public function create(Request $request, Order $order) {
-        $request->user()->orders()->save($order);
+        $app = new Application();
+        $app->freelancer()->associate($request->user());
+        $app->order()->associate($order);
+        $app->save();
         return redirect()->route('order.index');
     }
 
     public function index(Request $request) {
-        $orders = $this->orders->applications($request->user());
-        $names = [];
-        foreach ($orders as $order) {
-            $names[] = $order->freelancer;
+        if ($request->user()->roles->where('title', 'Работодатель')->first() != null) {
+            $applications = $request->user()->applications;
+            return view('applications.index', [
+                'applications' => $applications,
+                'flag' => false
+            ]);
         }
-        return view('applications.index', [
-            'orders' => $orders,
-            'names' => $names
-        ]);
+        if ($request->user()->roles->where('title', 'Фрилансер')->first() != null) {
+            $applications = $request->user()->applications;
+            return view('applications.index', [
+                'applications' => $applications,
+                'flag' => true
+            ]);
+        }
     }
 
-    public function accept(Order $order) {
-        $order->update([
+    public function accept(Application $application) {
+        $application->order->update([
+            'freelancer_id' => $application->freelancer->id,
             'accept' => true
         ]);
         return redirect()->route('application.index');
     }
 
-    public function cancel(Order $order)
-    {
-        $order->update([
-            'freelancer_id' => null
-        ]);
+    public function destroy(Application $application) {
+        $application->delete();
         return redirect()->route('application.index');
     }
 }
