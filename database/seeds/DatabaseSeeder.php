@@ -21,11 +21,5 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Фрилансер'],
         );
 
-        $test = new Order();
-        $test->title = 'Практика Сыча';
-        $test->description = 'Сделать биржу труда';
-        $test->employer_id = 4;
-        $test->accept = false;
-        $test->save();
     }
 }
