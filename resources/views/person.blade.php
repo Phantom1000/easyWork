@@ -1,6 +1,8 @@
 @extends('layouts.layout')
-@include('layouts.header')
+@section('title', "{{ $name }}")
 @section('content')
+	@include('layouts.header')
+    @include('layouts.menu')
 	<section class="Me">
 		<div class="container">
 			<div class="row desk">

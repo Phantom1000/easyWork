@@ -26,6 +26,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-6">
+                    <a href="{{ route('application.index') }}">Заявки</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-6">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Выйти</a>
                 </div>
             </div>

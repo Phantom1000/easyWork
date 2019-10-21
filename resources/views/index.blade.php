@@ -1,7 +1,8 @@
 @extends('layouts.layout')
-@include('layouts.header')
+@section('title', 'Главная')
 @section('content')
-	
+	@include('layouts.header')
+    @include('layouts.menu')
 	<!-- блок с котейкой и описанием биржы -->
 	<section class="first">
 		<div class="container">

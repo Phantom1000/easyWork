@@ -35,11 +35,19 @@ Route::get('/order/create', 'OrderController@create')->middleware('auth')->name(
 
 Route::delete('/order/{order}', 'OrderController@destroy')->middleware('auth', 'can:update,order')->name('order.destroy');
 
-Route::put('/order/{order}', 'OrderController@update')->middleware('auth')->name('order.update');
+Route::put('/order/{order}', 'OrderController@update')->middleware('auth', 'can:update,order')->name('order.update');
 
 Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 
 Route::get('/order/{order}/edit', 'OrderController@edit')->middleware('auth', 'can:update,order')->name('order.edit');
+
+Route::get('/application/{order}/create', 'ApplicationController@create')->middleware('auth')->name('application.create');
+
+Route::get('/application', 'ApplicationController@index')->middleware('auth')->name('application.index');
+
+Route::put('/application/{application}', 'ApplicationController@accept')->middleware('auth')->name('application.accept');
+
+Route::delete('/application/{application}', 'ApplicationController@destroy')->middleware('auth')->name('application.destroy');
 
 Route::get('test/{check}', function($check) {
     return view('test', [

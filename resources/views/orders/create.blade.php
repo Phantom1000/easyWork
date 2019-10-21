@@ -1,8 +1,10 @@
 @extends('layouts.layout')
-@include('layouts.header')
+@section('title', 'Создание заказа')
 @section('content')
+    @include('layouts.header')
+    @include('layouts.menu')
     <form action="{{ route('order.store') }}" method="POST">
-        {{ csrf_field() }}
+        @csrf
         @include('orders.form')
         <div class="row">
             <div class="col-lg-12 rightt">

@@ -23,18 +23,29 @@ class OrderController extends Controller
         $this->orders = $orders;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $isEmployer = false;
+        if ($request->user()->roles->where('title', 'Работодатель')->first() != null) $isEmployer = true;
         return view('orders.index', [
             'orders' => $this->orders->all(),
-            'change' => false
+            'change' => false,
+            'isEmployer' => $isEmployer
         ]);
     }
 
     public function myOrders(Request $request) {
+        $isEmployer = false;
+        if ($request->user()->roles->where('title', 'Работодатель')->first() != null) {
+            $isEmployer = true;
+            $orders = $this->orders->forEmployer($request->user());
+        } else {
+            $orders = $this->orders->forFreelancer($request->user());
+        }
         return view('orders.index', [
-            'orders' => $this->orders->forUser($request->user()),
-            'change' => true
+            'orders' => $orders,
+            'change' => true,
+            'isEmployer' => $isEmployer
         ]);
     }
 
@@ -120,6 +131,10 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
+        $apps = $order->applications;
+        foreach ($apps as $app) {
+            $app->delete();
+        }
         /*if (Gate::allows('delete-order', $order)) {*/
             $order->delete();
             return redirect()->route('order.my');
