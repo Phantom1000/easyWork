@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -26,7 +27,9 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $isEmployer = false;
-        if ($request->user()->roles->where('title', 'Работодатель')->first() != null) $isEmployer = true;
+        if (Auth::check()) {
+            if ($request->user()->roles->where('title', 'Работодатель')->first() != null) $isEmployer = true;
+        }
         return view('orders.index', [
             'orders' => $this->orders->all(),
             'change' => false,
