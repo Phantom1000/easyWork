@@ -2,7 +2,7 @@
 @include('layouts.header')
 @section('content')
 	@if ($change)
-		<a href="{{ route('order.create') }}" class="btn-link"><i class="fa fa-plus">Добавить заказ</i></a>
+		<a class="dvig" href="{{ route('order.create') }}" class="btn-link"><i class="fa fa-plus">Добавить заказ</i></a>
 	@endif
 	@forelse ($orders as $order)
 		<section class="order">
@@ -15,15 +15,15 @@
 			<div class=" order_text">
 				<div class="order_text1">
 					<span>{{ $order->description }}</span>
-					<a href="{{ route('profile', $order->employer_id) }}">Заказчик</a>
+					<a style="padding-right: 15px;" href="{{ route('profile', $order->employer_id) }}">Заказчик</a>
 				</div>
 				<a href="{{ route('order.show', $order) }}" style="color:blue; margin-right: 10px">Подробнее</a>
 				@if ($change)
-					<a href="{{ route('order.edit', $order) }}" style="color:blue; margin-right: 10px"><i class="fa fa-edit">Редактировать</i></a>
+					<a href="{{ route('order.edit', $order) }}" style="color:blue; padding-right: 20px; ">Редактировать</a>
 					<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
 						{{ csrf_field() }}
 						{{ method_field("DELETE") }}
-						<button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Удалить</button>
+						<button type="submit"> Удалить</button>
 					</form>
 				@endif
 			</div>

@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @include('layouts.header')
 @section('content')
-    <form action="{{ route('order.store') }}" method="POST" class="form-group">
+    <form action="{{ route('order.store') }}" method="POST">
         {{ csrf_field() }}
         @include('orders.form')
         <div class="row">

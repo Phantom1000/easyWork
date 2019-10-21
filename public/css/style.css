@@ -37,6 +37,9 @@ textarea{
 	margin-top: 0px;
 }
 
+form{
+	padding: 0;
+}
 
 /* Верхняя строка */
 header{
@@ -164,9 +167,14 @@ footer{
 }
 
 .order1{
-	border-left: 2px solid green; 
-	border-bottom: 2px solid green;
+	border-left: 2px solid black; 
+	border-bottom: 2px solid black;
 	padding-left: 30px;
+	padding-bottom: 15px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-radius: 10px;
+	padding-top: 15px;
 	padding-bottom: 15px;
 }
 
@@ -177,12 +185,22 @@ footer{
 .order_text{
 	display: flex;
 	justify-content: space-between;
-	padding-left: 20px;
+
+}
+
+.order_text1 a{
+	color: red;
+}
+
+.order_text button{
+	color: black;
 }
 
 .order_text1{
 	width: 750px;
 	text-align: justify;
+	display: flex;
+	justify-content: space-between;
 }
 
 #description{
@@ -239,6 +257,10 @@ footer{
 /* редактрование анкеты */
 
 .Me h3{
+	text-align: center;
+}
+
+.Me h2{
 	text-align: center;
 }
 
@@ -389,4 +411,17 @@ input{
 .test77{
 	margin-top: 70px;
 	padding-left: 284px;
+}
+
+
+.main_order{
+	background: white;
+}
+
+.test11{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	border-radius: 10px;
+	background: #e8e8e8;
+	margin-bottom: 30px;
 }

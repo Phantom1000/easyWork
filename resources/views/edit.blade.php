@@ -3,7 +3,7 @@
 @section('content')
     <section class="Me">
         <div class="container">
-            <form action="{{ route('profile.update', $user) }}" method="POST" enctype="multipart/form-data" class="form-group">
+            <form action="{{ route('profile.update', $user) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="row">
@@ -22,9 +22,9 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-lg-12 rightt">
-                    <button type="submit" class="btn-yes">Сохранить изменения</button>
-                </div>
+                    <div class="col-lg-12 rightt">
+                        <button type="submit" class="btn-yes">Сохранить изменения</button>
+                    </div>
             </form>
         </div>
     </section>
