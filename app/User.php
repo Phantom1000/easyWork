@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function applications() {
         if ($this->roles->where('title', 'Работодатель')->first() != null) return $this->hasManyThrough('App\Application', 'App\Order', 'employer_id', 'order_id');
-        return $this->hasMany('App\Application', 'freelancer_id');
+        return $this->hasMany('App\Application');
     }
 
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Gate;
 
 class ProfileController extends Controller
 {
-    public function index(User $user) {
+    public function show(User $user) {
         return view('person', [
             'user' => $user,
             'name' => $user->name,
@@ -33,7 +33,7 @@ class ProfileController extends Controller
 
     public function update(User $user, Request $request)
     {
-        $user->avatar = $request->file('avatar')->store('uploads', 'public');
+        if ($user->avatar) $user->avatar = $request->file('avatar')->store('uploads', 'public');
         $user->short_description = $request->input('short_description');
         $user->description = $request->input('description');
         $user->save();

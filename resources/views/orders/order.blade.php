@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', '{{ $order->title }}')
+@section('title', $order->title)
 @section('content')
 	@include('layouts.header')
     @include('layouts.menu')
@@ -10,7 +10,7 @@
 	        		<h2>{{ $order->title }}</h2>
 	        	</div>
 	        	<div class="row">
-	        		<a href="{{ route('profile', $employer) }}">{{ $employer->name }}</a>
+	        		<a href="{{ route('profile.show', $employer) }}">{{ $employer->name }}</a>
 	        </div>
 	        </div>
 	        <div class="row desk">

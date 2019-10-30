@@ -19,7 +19,7 @@
 			<div class=" order_text">
 				<div class="order_text1">
 					<span>{{ $order->description }}</span>
-					<a style="padding-right: 15px;" href="{{ route('profile', $order->employer) }}">Заказчик</a>
+					<a style="padding-right: 15px;" href="{{ route('profile.show', $order->employer) }}">Заказчик</a>
 					@if (!$change && !$isEmployer) <a href="{{ route('application.create', $order) }}">Подать заявку</a> @endif
 				</div>
 				<a href="{{ route('order.show', $order) }}" style="color:blue; margin-right: 10px">Подробнее</a>

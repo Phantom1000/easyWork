@@ -21,6 +21,8 @@ class CreateOrdersTable extends Migration
             $table->integer('freelancer_id')->nullable();
             $table->boolean('accept');
             $table->timestamps();
+            $table->index('employer_id');
+            $table->index('freelancer_id');
         });
     }
 

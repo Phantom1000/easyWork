@@ -17,6 +17,8 @@ class CreateRoleUserTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('role_id');
+            $table->index('user_id');
+            $table->index('role_id');
         });
     }
 
