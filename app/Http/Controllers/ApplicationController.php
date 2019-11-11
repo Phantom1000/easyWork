@@ -41,7 +41,7 @@ class ApplicationController extends Controller
         return view('applications.index', [
             'applications' => $applications,
             'flag' => $flag
-        ]};
+        ]);
     }
 
     public function accept(Application $application) {
