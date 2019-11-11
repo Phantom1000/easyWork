@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Gate;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -33,7 +34,15 @@ class ProfileController extends Controller
 
     public function update(User $user, Request $request)
     {
-        $user->avatar = $request->file('avatar')->store('uploads', 'public');
+        $data = $request->validate([
+            'avatar' => ['image'],
+        ]);
+        if ($request->avatar) {
+            $path = $request->file('avatar')->store('uploads', 'public');
+            $image = Image::make(public_path("storage/{$path}"))->fit(1200, 1200);
+            $image->save();
+            $user->avatar = $path;
+        }
         $user->short_description = $request->input('short_description');
         $user->description = $request->input('description');
         $user->save();
