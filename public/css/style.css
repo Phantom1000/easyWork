@@ -1,6 +1,6 @@
 /* Общее */
 body{
-	background: #e8e8e8;
+	background: white ;
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -8,6 +8,7 @@ a{
 	text-decoration: none;
 	color: white;
 }
+
 
 a:hover{
 	color:white;
@@ -45,10 +46,16 @@ form{
 header{
 	padding-top: 20px;
 	text-align: right;
+	background: #e8e8e8;
 }
 
 
 /* Меню */
+
+.menu{
+	background: #e8e8e8;
+}
+
 ul li{
 	float:left;
 }
@@ -112,6 +119,18 @@ ul{
 
 #get{
 	margin-top: 30px;
+		background-color: white;
+	display: inline-block;
+	color: black;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .5em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 10px;
+    transition: 0.2s;
+    width: 200px;
 }
 
 .second h3{
@@ -160,10 +179,12 @@ footer{
 
 /* ------------страница с биржой-------- */
 
+
 .order{
 	padding-top: 20px;
 	padding-bottom: 15px;
 	background: white;
+	border-radius: 10px;
 }
 
 .order1{
@@ -217,10 +238,11 @@ footer{
 	border-radius: 10px;
 	background: #e8e8e8;
 	margin-bottom: 30px;
+	padding-left: 30px;
 }
 
-.teext{
-
+.teext span{
+	padding-left: 20px;
 }
 
 .portfolio{
@@ -244,6 +266,7 @@ footer{
 	background-color: white;
 	padding-top: 30px;
 	padding-bottom: 30px;
+	border-radius: 10px;
 }
 
 .comments span{
@@ -261,7 +284,8 @@ footer{
 }
 
 .Me h2{
-	text-align: center;
+	text-align: left;
+	padding-left: 20px;
 }
 
 .btn-yes{
@@ -415,7 +439,7 @@ input{
 
 
 .main_order{
-	background: white;
+	padding-top: 50px;
 }
 
 .test11{
@@ -424,4 +448,19 @@ input{
 	border-radius: 10px;
 	background: #e8e8e8;
 	margin-bottom: 30px;
+	padding-left: 30px;
+}
+
+.nul{
+	text-align: center;
+	padding-top:250px;
+}
+
+.fint{
+	text-align: right;
+	font-size: 20px;
+}
+
+.ri{
+	text-align: right;
 }

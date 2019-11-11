@@ -23,7 +23,7 @@ Route::get('/profile/{user}/edit', 'ProfileController@edit')->middleware('auth',
 
 Route::put('/profile/{user}', 'ProfileController@update')->middleware('auth')->name('profile.update');
 
-Route::resource('/order', 'OrderController', ['except' => ['index', 'show'], 'middleware' => ['auth', 'can:update,order']]);
+Route::resource('/order', 'OrderController', ['except' => ['index', 'show'], 'middleware' => ['auth']]);
 
 Route::get('/order', 'OrderController@index')->name('order.index');
 
