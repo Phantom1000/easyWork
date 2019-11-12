@@ -20,8 +20,15 @@ class ProfileController extends Controller
     }
 
     public function index() {
-        $emp = Role::where('title', 'Работодатель')->take(1)->get();
-        $free = Role::where('title', 'Фрилансер')->take(1)->get();
+        $emp = Cache::remember('roles.employer', now()->addHours(2), function() {
+            return Role::where('title', 'Работодатель')->take(1)->get();
+        });
+        $free = Cache::remember('roles.freelancer', now()->addHours(2), function() {
+            return Role::where('title', 'Фрилансер')->take(1)->get();
+        });
+
+        //$emp = Role::where('title', 'Работодатель')->take(1)->get();
+        //$free = Role::where('title', 'Фрилансер')->take(1)->get();
         //dd($emp);
         $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function () use($free) {
             return $free[0]->users->count();

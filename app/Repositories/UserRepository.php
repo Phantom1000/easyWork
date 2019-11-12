@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\User;
 use App\Role;
+use Illuminate\Support\Facades\Cache;
 
 class UserRepository
 {
@@ -15,7 +16,8 @@ class UserRepository
      */
 
     public function getEmp(User $user) {
-        $emp = Role::where('title', 'Работодатель')->take(1)->get();
+        $emp = Cache::get('roles.employer', Role::where('title', 'Работодатель')->take(1)->get());
+        //$emp = Role::where('title', 'Работодатель')->take(1)->get();
         return $user->roles->contains($emp[0]);
     }
 
