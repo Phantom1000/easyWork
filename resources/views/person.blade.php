@@ -13,9 +13,9 @@
 					<h2>{{ $name }}</h2><br>
 					<span>{{ $short_description }}</span>
 					<br>
-					@if (Auth::user() == $user)
+					@can('update', $user)
 						<a href="{{ route('profile.edit', $user) }}" style="color:red; padding-left: 480px;">Редактировать профиль</a>
-					@endif
+					@endcan
 				</div>
 			</div>
 			<div class="row desk">
@@ -23,20 +23,22 @@
 					<h3>Портфолио</h3> <br>
 					<span>{{ $description }}</span>
 				</div>
-			</div>	
-			<div class="row desk">
-				<div class="comments">
-					<h3>Оценки от заказчиков:</h3> <br>
-					<div class="one">
-						<span></span>
-						<span></span>
-					</div>
-					<div class="one">
-						<span></span>
-						<span></span>
+			</div>
+			@if (!$isEmployer)	
+				<div class="row desk">
+					<div class="comments">
+						<h3>Оценки от заказчиков:</h3> <br>
+						<div class="one">
+							<span></span>
+							<span></span>
+						</div>
+						<div class="one">
+							<span></span>
+							<span></span>
+						</div>
 					</div>
 				</div>
-			</div>	
+			@endif
 		</div>
 	</section>
 @endsection

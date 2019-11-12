@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -46,8 +45,15 @@ class User extends Authenticatable
     }
 
     public function applications() {
-        if ($this->roles->where('title', 'Работодатель')->first() != null) return $this->hasManyThrough('App\Application', 'App\Order', 'employer_id', 'order_id');
-        return $this->hasMany('App\Application');
+        return $this->hasMany('App\Application', 'freelancer_id');
     }
 
+    public function empApplications() {
+        return $this->hasManyThrough('App\Application', 'App\Order', 'employer_id', 'order_id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 }

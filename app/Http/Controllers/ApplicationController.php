@@ -32,12 +32,13 @@ class ApplicationController extends Controller
 
     public function index(Request $request) {
         if ($this->users->getEmp($request->user())) {
-            $flag = true;
+            $flag = false;
+            $applications = $request->user()->empApplications;
         }
         else {
-            $flag = false;
+            $flag = true;
+            $applications = $request->user()->applications;
         }
-        $applications = $request->user()->applications;
         return view('applications.index', [
             'applications' => $applications,
             'flag' => $flag

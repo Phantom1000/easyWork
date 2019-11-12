@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', 'ProfileController@index')->name('index');
 
 Auth::routes();
 
@@ -47,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 
-Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
+Route::get('/profile/{user}', 'ProfileController@show')->name('profile.show');
 
 
 Route::get('test/{check}', function($check) {

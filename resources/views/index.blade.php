@@ -36,7 +36,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-lg-3">
-					<h3>80</h3>	<br>
+					<h3>{{ $employersCount }}</h3>	<br>
 					<span>
 						РАБОТОДАТЕЛЕЙ
 					</span>
@@ -56,7 +56,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<button id="get">Подать анкету</button>
+					<a id="get" href="{{ route('order.index') }}">Подать анкету</a>
 				</div>
 			</div>
 		</div>
@@ -74,7 +74,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-lg-3">
-					<h3>282</h3>	<br>
+					<h3>{{ $freelancersCount }}</h3>	<br>
 					<span>
 						ФРИЛАНСЕРА
 					</span>

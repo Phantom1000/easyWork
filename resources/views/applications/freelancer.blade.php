@@ -17,6 +17,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit">Отменить</button>
+            </form>
             @endif
         </h2>
     </div>
