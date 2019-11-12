@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use App\Role;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -20,6 +21,11 @@ class ProfileController extends Controller
     }
 
     public function index() {
+        if (Auth::check() && (session('role') == null)) {
+            $role = Auth::user()->roles->first();
+            session(['role' => $role]);
+        }
+
         $emp = Cache::remember('roles.employer', now()->addHours(2), function() {
             return Role::where('title', 'Работодатель')->take(1)->get();
         });
@@ -53,7 +59,7 @@ class ProfileController extends Controller
             'short_description' => $user->short_description,
             'description' => $user->description,
             'avatar' => $user->avatar,
-            'isEmployer' => $this->users->getEmp($user)
+            'isEmployer' => $user->roles->contains(Role::where('title', 'Работодатель')->first())
         ]);
     }
 

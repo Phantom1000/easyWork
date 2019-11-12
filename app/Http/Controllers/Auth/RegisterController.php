@@ -8,7 +8,6 @@ use App\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\URL;
 
 class RegisterController extends Controller
 {
@@ -72,9 +71,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $role = 1;
+        $role = null;
         if ($data['role'] == 'employer') $role = Role::where('title', 'Работодатель')->first();
         if ($data['role'] == 'freelancer') $role = Role::where('title', 'Фрилансер')->first();
+        session(['role' => $role]);
         $user->roles()->attach([
             'role_id' => $role->id,
         ]);

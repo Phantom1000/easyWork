@@ -31,7 +31,7 @@ class ApplicationController extends Controller
     }
 
     public function index(Request $request) {
-        if ($this->users->getEmp($request->user())) {
+        if ($this->users->isEmp()) {
             $flag = false;
             $applications = $request->user()->empApplications;
         }

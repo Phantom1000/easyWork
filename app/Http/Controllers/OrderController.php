@@ -31,8 +31,9 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $isEmployer = false;
+        //dd(session('role'));
         if (Auth::check()) {
-            if ($this->users->getEmp($request->user())) $isEmployer = true;
+            if ($this->users->isEmp()) $isEmployer = true;
         }
         return view('orders.index', [
             'orders' => $this->orders->all(),
@@ -43,7 +44,7 @@ class OrderController extends Controller
 
     public function myOrders(Request $request) {
         $isEmployer = false;
-        if ($this->users->getEmp($request->user())) {
+        if ($this->users->isEmp()) {
             $isEmployer = true;
             $orders = $this->orders->forEmployer($request->user());
         } else {
