@@ -1,5 +1,4 @@
 @extends('layouts.layout')
-@section('title', $name)
 @section('content')
 	@include('layouts.header')
     @include('layouts.menu')

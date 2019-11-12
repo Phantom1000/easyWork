@@ -33,7 +33,6 @@ class ProfileController extends Controller
 
     public function update(User $user, Request $request)
     {
-        if ($user->avatar) $user->avatar = $request->file('avatar')->store('uploads', 'public');
         $user->short_description = $request->input('short_description');
         $user->description = $request->input('description');
         $user->save();
