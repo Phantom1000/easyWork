@@ -17,6 +17,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/order', 'OrderController@index')->name('order.index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile/{user}/edit', 'ProfileController@edit')->middleware('can:update,user')->name('profile.edit');
+    
+    Route::put('/profile/{user}', 'ProfileController@update')->name('profile.update');
+    
+    Route::post('/order', 'OrderController@store')->name('order.store');
+    
+    Route::get('/order/my', 'OrderController@myOrders')->name('order.my');
+    
+    Route::get('/order/create', 'OrderController@create')->name('order.create');
+    
+    Route::delete('/order/{order}', 'OrderController@destroy')->middleware('can:update,order')->name('order.destroy');
+    
+    Route::put('/order/{order}', 'OrderController@update')->middleware('can:update,order')->name('order.update');
+    
+    Route::get('/order/{order}/edit', 'OrderController@edit')->middleware('can:update,order')->name('order.edit');
+    
+    Route::get('/application/{order}/create', 'ApplicationController@create')->name('application.create');
+    
+    Route::get('/application', 'ApplicationController@index')->name('application.index');
+    
+    Route::put('/application/{application}', 'ApplicationController@accept')->name('application.accept');
+    
+    Route::delete('/application/{application}', 'ApplicationController@destroy')->name('application.destroy');
+});
+
+Route::get('/order/{order}', 'OrderController@show')->name('order.show');
+
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
 
 
 Route::get('test/{check}', function($check) {

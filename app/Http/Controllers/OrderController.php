@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,17 +20,19 @@ class OrderController extends Controller
      */
 
     protected $orders;
+    protected $users;
 
-    public function __construct(OrderRepository $orders)
+    public function __construct(OrderRepository $orders, UserRepository $users)
     {
         $this->orders = $orders;
+        $this->users = $users;
     }
 
     public function index(Request $request)
     {
         $isEmployer = false;
         if (Auth::check()) {
-            if ($request->user()->roles->where('title', 'Работодатель')->first() != null) $isEmployer = true;
+            if ($this->users->getEmp($request->user())) $isEmployer = true;
         }
         return view('orders.index', [
             'orders' => $this->orders->all(),
@@ -39,7 +43,7 @@ class OrderController extends Controller
 
     public function myOrders(Request $request) {
         $isEmployer = false;
-        if ($request->user()->roles->where('title', 'Работодатель')->first() != null) {
+        if ($this->users->getEmp($request->user())) {
             $isEmployer = true;
             $orders = $this->orders->forEmployer($request->user());
         } else {
@@ -77,12 +81,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        Order::create([
+        $order = Order::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'employer_id' => $request->user()->id,
             'accept' => false
         ]);
+        //$order->employer->attach($request->user());
         return redirect()->route('order.my');
     }
 
@@ -96,7 +101,7 @@ class OrderController extends Controller
     {
         return view('orders.order', [
             'order' => $order,
-            'employer' => User::find($order->employer_id)
+            'employer' => $order->employer
         ]);
     }
 

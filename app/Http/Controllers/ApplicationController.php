@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\OrderRepository;
+use App\Repositories\UserRepository;
 
 use Illuminate\Http\Request;
 
@@ -13,10 +14,12 @@ use App\Application;
 class ApplicationController extends Controller
 {
     protected $orders;
+    protected $users;
 
-    public function __construct(OrderRepository $orders)
+    public function __construct(OrderRepository $orders, UserRepository $users)
     {
         $this->orders = $orders;
+        $this->users = $users;
     }
  
     public function create(Request $request, Order $order) {
@@ -28,20 +31,17 @@ class ApplicationController extends Controller
     }
 
     public function index(Request $request) {
-        if ($request->user()->roles->where('title', 'Работодатель')->first() != null) {
-            $applications = $request->user()->applications;
-            return view('applications.index', [
-                'applications' => $applications,
-                'flag' => false
-            ]);
+        if ($this->users->getEmp($request->user())) {
+            $flag = true;
         }
-        if ($request->user()->roles->where('title', 'Фрилансер')->first() != null) {
-            $applications = $request->user()->applications;
-            return view('applications.index', [
-                'applications' => $applications,
-                'flag' => true
-            ]);
+        else {
+            $flag = false;
         }
+        $applications = $request->user()->applications;
+        return view('applications.index', [
+            'applications' => $applications,
+            'flag' => $flag
+        ]);
     }
 
     public function accept(Application $application) {

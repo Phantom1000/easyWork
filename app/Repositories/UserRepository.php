@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\User;
+use App\Role;
 
 class UserRepository
 {
@@ -13,8 +14,9 @@ class UserRepository
      * @return Collection
      */
 
-    public function getRole() {
-        
+    public function getEmp(User $user) {
+        $emp = Role::where('title', 'Работодатель')->take(1)->get();
+        return $user->roles->contains($emp[0]);
     }
 
 }

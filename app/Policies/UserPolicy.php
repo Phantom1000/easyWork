@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use App\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -14,9 +15,10 @@ class UserPolicy
      *
      * @return void
      */
+
     public function __construct()
     {
-        //
+        
     }
 
     public function update(User $user, User $user2) {
