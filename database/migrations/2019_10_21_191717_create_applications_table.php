@@ -18,6 +18,8 @@ class CreateApplicationsTable extends Migration
             $table->integer('order_id');
             $table->integer('freelancer_id');
             $table->timestamps();
+            $table->index('order_id');
+            $table->index('freelancer_id');
         });
     }
 

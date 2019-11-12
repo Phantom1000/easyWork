@@ -9,7 +9,7 @@ use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
-    public function index(User $user) {
+    public function show(User $user) {
         return view('person', [
             'user' => $user,
             'name' => $user->name,
@@ -43,6 +43,7 @@ class ProfileController extends Controller
             $image->save();
             $user->avatar = $path;
         }
+
         $user->short_description = $request->input('short_description');
         $user->description = $request->input('description');
         $user->save();

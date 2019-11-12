@@ -9,11 +9,12 @@
 				<div class="col-lg-4 foto">
 					<img src="@isset($avatar) {{ asset('/storage/' . $avatar) }} @endisset" class="my_foto" alt="">
 				</div>
-				<div class="col-lg-5 teext">
+				<div class="col-lg-8 teext">
 					<h2>{{ $name }}</h2><br>
 					<span>{{ $short_description }}</span>
+					<br>
 					@if (Auth::user() == $user)
-						<a href="{{ route('profile.edit', $user) }}" style="color:red">Редактировать профиль</a>
+						<a href="{{ route('profile.edit', $user) }}" style="color:red; padding-left: 480px;">Редактировать профиль</a>
 					@endif
 				</div>
 			</div>

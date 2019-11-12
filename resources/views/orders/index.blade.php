@@ -16,26 +16,30 @@
 					<h2>{{ $order->title }}</h2>
 				</div>
 			</div>
-			<div class=" order_text">
-				<div class="order_text1">
-					<span>{{ $order->description }}</span>
-					<a style="padding-right: 15px;" href="{{ route('profile', $order->employer) }}">Заказчик</a>
-					@if (!$change && !$isEmployer) <a href="{{ route('application.create', $order) }}">Подать заявку</a> @endif
-				</div>
-				<a href="{{ route('order.show', $order) }}" style="color:blue; margin-right: 10px">Подробнее</a>
+			<div class="row order_text">
+				<div class="col-lg-12">
+					<div class="order_text1">
+						<span>{{ $order->description }}</span>
+						<div class="ri">
+							<a style="padding-right: 15px;" href="{{ route('profile.show', $order->employer) }}">Заказчик</a>
+							@if (!$change && !$isEmployer) <a style="padding-right: 15px;" href="{{ route('application.create', $order) }}">Подать заявку</a> @endif
+							<a href="{{ route('order.show', $order) }}" style="color:black">Подробнее</a>
+						</div>
+					</div>
+				
 				@if ($change && $isEmployer)
-					<a href="{{ route('order.edit', $order) }}" style="color:blue; padding-right: 20px; ">Редактировать</a>
+					<a href="{{ route('order.edit', $order) }}" style="color:black; padding-right: 20px; ">Редактировать</a>
 					<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
 						@csrf
 						@method('DELETE')
 						<button type="submit"> Удалить</button>
 					</form>
 				@endif
+				</div>
 			</div>
 		</div>
 		</section>
 	@empty
-		<h1>Пока нету заказов :(</h1>
+		<h1 class="nul">Пока нету заказов</h1>
 	@endforelse
-	@include('layouts.footer')
 @endsection

@@ -94,7 +94,7 @@
 			</div>			
 			<div class="row">
 				<div class="col-lg-12">
-					<button id="get"><a href="{{ route('order.create') }}">Подать заказ</a></button>
+					<a id="get" href="{{ route('order.create') }}">Подать заказ</a>
 				</div>
 			</div>
 		</div>

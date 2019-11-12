@@ -11,8 +11,7 @@
                 @include('applications.employer')
             @endif
         @empty
-            <h2>У вас пока нет заявок</h2>
+            <h2 class="nul">У вас пока нет заявок</h2>
         @endforelse
     </section>
-	@include('layouts.footer')
 @endsection
