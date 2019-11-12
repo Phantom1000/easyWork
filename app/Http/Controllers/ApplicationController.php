@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\OrderRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Http\Request;
 
@@ -23,15 +24,16 @@ class ApplicationController extends Controller
     }
  
     public function create(Request $request, Order $order) {
+        $this->authorize('create-application', [$order, $this->users]);
         $app = new Application();
         $app->freelancer()->associate($request->user());
         $app->order()->associate($order);
         $app->save();
-        return redirect()->route('order.index');
+        return redirect()->route('order.show', $order);
     }
 
     public function index(Request $request) {
-        if ($this->users->isEmp()) {
+        if ($this->users->isEmp($request->user())) {
             $flag = false;
             $applications = $request->user()->empApplications;
         }

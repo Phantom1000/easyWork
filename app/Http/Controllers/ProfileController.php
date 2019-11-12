@@ -21,27 +21,27 @@ class ProfileController extends Controller
     }
 
     public function index() {
-        if (Auth::check() && (session('role') == null)) {
+        /*if (Auth::check() && (session('role') == null)) {
             $role = Auth::user()->roles->first();
             session(['role' => $role]);
-        }
+        }*/
 
         $emp = Cache::remember('roles.employer', now()->addHours(2), function() {
-            return Role::where('title', 'Работодатель')->take(1)->get();
+            return Role::where('title', 'Работодатель')->first();
         });
         $free = Cache::remember('roles.freelancer', now()->addHours(2), function() {
-            return Role::where('title', 'Фрилансер')->take(1)->get();
+            return Role::where('title', 'Фрилансер')->first();
         });
 
         //$emp = Role::where('title', 'Работодатель')->take(1)->get();
         //$free = Role::where('title', 'Фрилансер')->take(1)->get();
         //dd($emp);
         $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function () use($free) {
-            return $free[0]->users->count();
+            return $free->users->count();
         });
 
         $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function () use ($emp) {
-            return $emp[0]->users->count();
+            return $emp->users->count();
         });
 
         return view('index', [

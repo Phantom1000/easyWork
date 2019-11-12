@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,24 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('delete-order', function ($user, $order) {
             return $user->id == $order->employer_id;
+        });
+
+        Gate::define('create-application', function($user, $order, $repos) {
+            $isApply = false;
+            if (Auth::check()) {
+                if (!$repos->isEmp($user)) {
+                    $isApply = true;
+                    $apps = $order->applications;
+                    foreach ($apps as $app) {
+                        if ($app->freelancer->id == $user->id) {
+                            $isApply = false;
+                            break;
+                        }
+                    }
+                    if ($order->freelancer == $user) $isApply = false;
+                }
+            }
+            return $isApply;
         });
     }
 }

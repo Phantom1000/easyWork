@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Role;
 use App\Order;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,5 @@ class DatabaseSeeder extends Seeder
         Role::create(
             ['title' => 'Фрилансер'],
         );
-
     }
 }

@@ -13,8 +13,12 @@
 	        
 	        <div class="row desk">
 	        	<p class="col-lg-12">{{ $order->description }}</p>
-	        </div>
-
+			</div>
+			<div class="row">
+				@if ($isApply)
+					<a style="color:red; padding-right: 15px;" href="{{ route('application.create', $order) }}">Подать заявку</a>
+				@endif
+			</div>
 	        <div class="row fint">
 	        	<div class="col-lg-12">
 	        		<span>Заказчик:  </span>

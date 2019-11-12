@@ -4,8 +4,6 @@
             @if ($application->order->accept)
                 @if ($application->order->freelancer->id == Auth::user()->id)
                     была одобрена
-                @else
-                    была отклонена
                 @endif
             <form action="{{ route('application.destroy', $application) }}" method="POST">
                 @csrf

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\User;
-use App\Role;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use App\Repositories\UserRepository;
@@ -33,7 +31,7 @@ class OrderController extends Controller
         $isEmployer = false;
         //dd(session('role'));
         if (Auth::check()) {
-            if ($this->users->isEmp()) $isEmployer = true;
+            if ($this->users->isEmp($request->user())) $isEmployer = true;
         }
         return view('orders.index', [
             'orders' => $this->orders->all(),
@@ -44,7 +42,7 @@ class OrderController extends Controller
 
     public function myOrders(Request $request) {
         $isEmployer = false;
-        if ($this->users->isEmp()) {
+        if ($this->users->isEmp($request->user())) {
             $isEmployer = true;
             $orders = $this->orders->forEmployer($request->user());
         } else {
@@ -82,7 +80,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create([
+        Order::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'employer_id' => $request->user()->id,
@@ -98,11 +96,26 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Request $request, Order $order)
     {
-        return view('orders.order', [
+        $isApply = false;
+        if (Auth::check()) {
+            if (!$this->users->isEmp($request->user())) {
+                $isApply = true;
+                $apps = $order->applications;
+                foreach ($apps as $app) {
+                    if ($app->freelancer->id == $request->user()->id) {
+                        $isApply = false;
+                        break;
+                    }
+                }
+                if ($order->freelancer == $request->user()) $isApply = false;
+            }
+        }
+        return view('orders.show', [
             'order' => $order,
-            'employer' => $order->employer
+            'employer' => $order->employer,
+            'isApply' => $isApply
         ]);
     }
 
@@ -129,6 +142,13 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $order->update($request->all());
+        return redirect()->route('order.my');
+    }
+
+    public function finish(Order $order)
+    {
+        $order->finish = true;
+        $order->save();
         return redirect()->route('order.my');
     }
 

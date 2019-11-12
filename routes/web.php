@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/order/{order}', 'OrderController@update')->middleware('can:update,order')->name('order.update');
     
     Route::get('/order/{order}/edit', 'OrderController@edit')->middleware('can:update,order')->name('order.edit');
+
+    Route::post('/order/{order}/finish', 'OrderController@finish')->name('order.finish');
     
     Route::get('/application/{order}/create', 'ApplicationController@create')->name('application.create');
     

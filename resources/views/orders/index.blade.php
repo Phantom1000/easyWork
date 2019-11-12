@@ -23,18 +23,34 @@
 								<span>{{ $order->description }}</span>
 								<div class="ri">
 									<a style="padding-right: 15px;" href="{{ route('profile.show', $order->employer) }}">Заказчик</a>
-									@if (!$change && !$isEmployer && ($order->freelancer_id != Auth::user()->id)) <a style="padding-right: 15px;" href="{{ route('application.create', $order) }}">Подать заявку</a> @endif
 									<a href="{{ route('order.show', $order) }}" style="color:black">Подробнее</a>
 								</div>
 							</div>
 						
-						@if ($change && $isEmployer)
-							<a href="{{ route('order.edit', $order) }}" style="color:black; padding-right: 20px; ">Редактировать</a>
-							<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
-								@csrf
-								@method('DELETE')
-								<button type="submit"> Удалить</button>
-							</form>
+						@if ($change)
+							@if($isEmployer)
+								<a href="{{ route('order.edit', $order) }}" style="color:black; padding-right: 20px; ">Редактировать</a>
+								Статус: 
+								@if ($order->finish)
+									Выполнено<a href="#">Оценить фрилансера</a>
+								@elseif($order->accept)
+									В разработке
+								@else
+									В ожидании заявки
+								@endif						
+								<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
+									@csrf
+									@method('DELETE')
+									<button type="submit"> Удалить</button>
+								</form>
+							@else
+								@if (!$order->finish)
+									<form action="{{ route('order.finish', $order) }}" method="POST">
+										@csrf
+										<button type="submit"> Выполнено</button>
+									</form>
+								@endif
+							@endif
 						@endif
 						</div>
 					</div>
