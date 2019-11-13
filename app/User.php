@@ -41,15 +41,15 @@ class User extends Authenticatable
     }
 
     public function orders() {
-        return $this->hasMany('App\Order');
+        return $this->hasMany('App\Order')->orderBy('created_at', 'desc');
     }
 
     public function applications() {
-        return $this->hasMany('App\Application', 'freelancer_id');
+        return $this->hasMany('App\Application', 'freelancer_id')->orderBy('created_at', 'desc');
     }
 
     public function empApplications() {
-        return $this->hasManyThrough('App\Application', 'App\Order', 'employer_id', 'order_id');
+        return $this->hasManyThrough('App\Application', 'App\Order', 'employer_id', 'order_id')->orderBy('created_at', 'desc');
     }
 
     public function getRouteKeyName()

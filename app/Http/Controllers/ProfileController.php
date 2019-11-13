@@ -37,11 +37,11 @@ class ProfileController extends Controller
         //$free = Role::where('title', 'Фрилансер')->take(1)->get();
         //dd($emp);
         $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function () use($free) {
-            return $free->users->count();
+            return $free[0]->users->count();
         });
 
         $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function () use ($emp) {
-            return $emp->users->count();
+            return $emp[0]->users->count();
         });
 
         return view('index', [
@@ -78,7 +78,7 @@ class ProfileController extends Controller
 
     public function update(User $user, Request $request)
     {
-        $data = $request->validate([
+        $this->validate($request, [
             'avatar' => ['image'],
         ]);
         if ($request->avatar) {

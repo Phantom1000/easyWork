@@ -34,7 +34,7 @@ class OrderController extends Controller
             if ($this->users->isEmp($request->user())) $isEmployer = true;
         }
         return view('orders.index', [
-            'orders' => $this->orders->all(),
+            'orders' => Order::all(),
             'change' => false,
             'isEmployer' => $isEmployer
         ]);
@@ -80,6 +80,10 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'description' => 'required'
+        ]);
         Order::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -141,6 +145,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'description' => 'required'
+        ]);
         $order->update($request->all());
         return redirect()->route('order.my');
     }
