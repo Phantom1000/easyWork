@@ -74,8 +74,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $role = null;
-        if ($data['role'] == 'employer') $role = Role::where('title', 'Работодатель')->first();
-        if ($data['role'] == 'freelancer') $role = Role::where('title', 'Фрилансер')->first();
+        if ($data['role'] == 'employer') $role = Role::getEmployer();
+        if ($data['role'] == 'freelancer') $role = Role::getFreelancer();
         session(['role' => $data['role']]);
         $user->roles()->attach([
             'role_id' => $role->id,

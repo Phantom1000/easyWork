@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use App\Role;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -21,11 +19,6 @@ class ProfileController extends Controller
     }
 
     public function index() {
-        /*if (Auth::check() && (session('role') == null)) {
-            $role = Auth::user()->roles->first();
-            session(['role' => $role]);
-        }*/
-
         $emp = Cache::remember('roles.employer', now()->addHours(2), function() {
             return Role::where('title', 'Работодатель')->first();
         });
@@ -33,15 +26,13 @@ class ProfileController extends Controller
             return Role::where('title', 'Фрилансер')->first();
         });
 
-        //$emp = Role::where('title', 'Работодатель')->take(1)->get();
-        //$free = Role::where('title', 'Фрилансер')->take(1)->get();
         //dd($emp);
         $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function () use($free) {
-            return $free[0]->users->count();
+            return $free->users->count();
         });
 
         $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function () use ($emp) {
-            return $emp[0]->users->count();
+            return $emp->users->count();
         });
 
         return view('index', [
@@ -59,7 +50,7 @@ class ProfileController extends Controller
             'short_description' => $user->short_description,
             'description' => $user->description,
             'avatar' => $user->avatar,
-            'isEmployer' => $user->roles->contains(Role::where('title', 'Работодатель')->first())
+            'isEmployer' => $user->roles->contains(Role::getEmployer())
         ]);
     }
 

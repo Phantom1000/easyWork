@@ -17,8 +17,4 @@ class Order extends Model
     public function freelancer() {
         return $this->belongsTo('App\User', 'freelancer_id');
     }
-
-    public function applications() {
-        return $this->hasMany('App\Application');
-    }
 }

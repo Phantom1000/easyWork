@@ -107,12 +107,13 @@ class OrderController extends Controller
             if (!$this->users->isEmp($request->user())) {
                 $isApply = true;
                 $apps = $order->applications;
-                foreach ($apps as $app) {
-                    if ($app->freelancer->id == $request->user()->id) {
-                        $isApply = false;
-                        break;
+                if($apps) 
+                    foreach ($apps as $app) {
+                        if ($app->freelancer->id == $request->user()->id) {
+                            $isApply = false;
+                            break;
+                        }
                     }
-                }
                 if ($order->freelancer == $request->user()) $isApply = false;
             }
         }

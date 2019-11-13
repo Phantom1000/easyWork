@@ -19,7 +19,7 @@ class UserRepository
         $role = Session::get('role');
         if ($role != null) return $role == 'employer';
         else {
-            $emp = Role::where('title', 'Работодатель')->first();
+            $emp = Role::getEmployer();
             if ($user->roles->contains($emp)) {
                 Session::put('role', 'employer');
                 return true;
