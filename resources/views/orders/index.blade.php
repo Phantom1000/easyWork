@@ -14,44 +14,43 @@
 				<div class="container order1">
 					<div class="row">
 						<div class="col-lg-12">
-							<h2>{{ $order->title }}</h2>
+							<h2>{{ $order->title ?? '' }}</h2>
 						</div>
 					</div>
 					<div class="row order_text">
 						<div class="col-lg-12">
 							<div class="order_text1">
-								<span>{{ $order->description }}</span>
+								<span>{{ $order->description ?? '' }}</span>
 								<div class="ri">
 									<a style="padding-right: 15px;" href="{{ route('profile.show', $order->employer) }}">Заказчик</a>
 									<a href="{{ route('order.show', $order) }}" style="color:black">Подробнее</a>
 								</div>
 							</div>
-						
-						@if ($change)
-							@if($isEmployer)
-								<a href="{{ route('order.edit', $order) }}" style="color:black; padding-right: 20px; ">Редактировать</a>
-								Статус: 
-								@if ($order->finish)
-									Выполнено<a href="#">Оценить фрилансера</a>
-								@elseif($order->accept)
-									В разработке
-								@else
-									В ожидании заявки
-								@endif						
-								<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
-									@csrf
-									@method('DELETE')
-									<button type="submit"> Удалить</button>
-								</form>
-							@else
-								@if (!$order->finish)
-									<form action="{{ route('order.finish', $order) }}" method="POST">
+							@if ($change)
+								@if($isEmployer)
+									<a href="{{ route('order.edit', $order) }}" style="color:black; padding-right: 20px; ">Редактировать</a>
+									Статус: 
+									@if ($order->finish)
+										Выполнено<a href="#">Оценить фрилансера</a>
+									@elseif($order->accept)
+										В разработке
+									@else
+										В ожидании заявки
+									@endif						
+									<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
 										@csrf
-										<button type="submit"> Выполнено</button>
+										@method('DELETE')
+										<button type="submit"> Удалить</button>
 									</form>
+								@else
+									@if (!$order->finish)
+										<form action="{{ route('order.finish', $order) }}" method="POST">
+											@csrf
+											<button type="submit"> Выполнено</button>
+										</form>
+									@endif
 								@endif
 							@endif
-						@endif
 						</div>
 					</div>
 				</div>
@@ -59,5 +58,8 @@
 		@empty
 			<h1 class="nul">Пока нету заказов</h1>
 		@endforelse
-	@endsection
-</div>
+		<nav class="pagination">
+			{{ $orders->links() }}
+		</nav>
+	</div>
+@endsection

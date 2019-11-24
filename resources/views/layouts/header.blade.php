@@ -3,16 +3,14 @@
         @guest
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="{{ url()->current() . '#gray1' }}">Войти</a>
+                    <a href="{{ route('login') }}">Войти</a>
                 </div>
             </div>
-            @if (Route::has('register'))
-                <div class="row">
-                    <div class="col-lg-12">
-                        <a href="{{ url()->current() . '#gray' }}">Регистрация</a>
-                    </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="{{ route('register') }}">Регистрация</a>
                 </div>
-            @endif
+            </div>
         @else
             <div class="row">
                 <div class="col-lg-12 col-6">

@@ -52,6 +52,15 @@ class ApplicationController extends Controller
             'freelancer_id' => $application->freelancer->id,
             'accept' => true
         ]);
+        $application->order->applications->where('freelancer_id', '!=', $application->freelancer->id)->each(function($item) {
+            $this->reject($item);
+        });
+        return redirect()->route('application.index');
+    }
+
+    public function reject(Application $application) {
+        $application->reject = true;
+        $application->save();
         return redirect()->route('application.index');
     }
 

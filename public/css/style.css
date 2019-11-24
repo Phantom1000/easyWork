@@ -273,10 +273,6 @@ footer{
 	padding-left: 50px;	
 }
 
-.one{
-
-}
-
 /* редактрование анкеты */
 
 .Me h3{
@@ -339,39 +335,26 @@ footer{
 
 
 /* -----------фщрма регистраци------- */
-#form-wrap{
+.form-wrap{
 	padding-top: 100px;
 	z-index: 150;
 }
-#gray{
+
+.gray{
 	background-color: rgba(1,1,1,0.8);
 	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
 	bottom: 0;
-	display: none;
+	display: block;
 	z-index: 100;
 }
-
-#gray:target {display: block;}
 
 #form-wrap1{
 	padding-top: 100px;
 	z-index: 150;	
 }
-#gray1{
-	background-color: rgba(1,1,1,0.8);
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	display: none;
-	z-index: 100;
-}
-
-#gray1:target {display: block;} 
 
 input{
 	width: 360px;

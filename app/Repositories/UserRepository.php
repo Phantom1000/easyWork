@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\User;
 use App\Role;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class UserRepository
@@ -15,22 +16,15 @@ class UserRepository
      * @return Collection
      */
 
-    public function isEmp(User $user) {
-        $role = Session::get('role');
-        if ($role != null) return $role == 'employer';
-        else {
-            $emp = Role::where('title', 'Работодатель')->first();
-            if ($user->roles->contains($emp)) {
-                Session::put('role', 'employer');
-                return true;
-            } else {
-                Session::put('role', 'freelancer');
-                return false;
-            }
+    public function isEmp($user) {
+        if (Session::get('roles') == null) {
+            Session::put('roles', $user->roles);
         }
-        /*$emp = Cache::get('roles.employer', Role::where('title', 'Работодатель')->take(1)->get());
-        //$emp = Role::where('title', 'Работодатель')->take(1)->get();
-        return $user->roles->contains($emp[0]);*/
+        $roles = Session::get('roles');
+        foreach ($roles as $role) {
+            if ($role->title == 'Работодатель') return true;
+        }
+        return false;
     }
 
 }

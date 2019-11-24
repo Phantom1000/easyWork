@@ -10,8 +10,8 @@
 					<img src="@isset($avatar) {{ asset('/storage/' . $avatar) }} @endisset" class="my_foto" alt="">
 				</div>
 				<div class="col-lg-8 teext">
-					<h2>{{ $name }}</h2><br>
-					<span>{{ $short_description }}</span>
+					<h2>{{ $name ?? '' }}</h2><br>
+					<span>{{ $short_description ?? '' }}</span>
 					<br>
 					@can('update', $user)
 						<a href="{{ route('profile.edit', $user) }}" style="color:red; padding-left: 480px;">Редактировать профиль</a>
@@ -21,7 +21,7 @@
 			<div class="row desk">
 				<div class="co-lg-12 portfolio">
 					<h3>Портфолио</h3> <br>
-					<span>{{ $description }}</span>
+					<span>{{ $description ?? '' }}</span>
 				</div>
 			</div>
 			@if (!$isEmployer)	

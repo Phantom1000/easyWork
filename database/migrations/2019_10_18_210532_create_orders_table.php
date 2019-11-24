@@ -17,13 +17,11 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description');
-            $table->integer('employer_id');
+            $table->integer('employer_id')->nullable();
             $table->integer('freelancer_id')->nullable();
-            $table->boolean('accept');
+            $table->boolean('accept')->default(false);
             $table->boolean('finish')->default(false);
             $table->timestamps();
-            $table->index('employer_id');
-            $table->index('freelancer_id');
         });
     }
 
