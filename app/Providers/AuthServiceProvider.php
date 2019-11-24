@@ -46,12 +46,17 @@ class AuthServiceProvider extends ServiceProvider
                 if (!$repos->isEmp($user)) {
                     $isApply = true;
                     $apps = $order->applications;
+                    if ($apps) {
+                        $apps = $apps->pluck('freelancer_id');
+                        if ($apps->contains($user->id)) $isApply = false;
+                    }
+                    /*if($apps) 
                     foreach ($apps as $app) {
-                        if ($app->freelancer->id == $user->id) {
+                        if ($app->freelancer->id == $request->user()->id) {
                             $isApply = false;
                             break;
                         }
-                    }
+                    }*/
                     if ($order->freelancer == $user) $isApply = false;
                 }
             }

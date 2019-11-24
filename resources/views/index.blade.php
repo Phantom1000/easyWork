@@ -36,13 +36,13 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-lg-3">
-					<h3>{{ $employersCount }}</h3>	<br>
+					<h3>{{ $employersCount ?? '' }}</h3>	<br>
 					<span>
 						РАБОТОДАТЕЛЕЙ
 					</span>
 				</div>
 				<div class="col-lg-3">
-					<h3>330</h3> <br>
+					<h3>{{ $ordersCount ?? '' }}</h3> <br>
 					<span>
 						ЗАКАЗОВ
 					</span>
@@ -74,13 +74,13 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-lg-3">
-					<h3>{{ $freelancersCount }}</h3>	<br>
+					<h3>{{ $freelancersCount ?? '' }}</h3>	<br>
 					<span>
 						ФРИЛАНСЕРА
 					</span>
 				</div>
 				<div class="col-lg-3">
-					<h3>789</h3> <br>
+					<h3>{{ $worksCount ?? '' }}</h3> <br>
 					<span>
 						ВЫПОЛНЕННЫХ ЗАКАЗОВ
 					</span>

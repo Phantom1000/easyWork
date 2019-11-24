@@ -8,7 +8,9 @@
             @if ($flag)
                 @include('applications.freelancer')
             @else
-                @include('applications.employer')
+                @if (!$application->reject)
+                    @include('applications.employer')             
+                @endif
             @endif
         @empty
             <h2 class="nul">У вас пока нет заявок</h2>

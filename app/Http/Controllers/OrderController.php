@@ -34,7 +34,7 @@ class OrderController extends Controller
             if ($this->users->isEmp($request->user())) $isEmployer = true;
         }
         return view('orders.index', [
-            'orders' => Order::all(),
+            'orders' => Order::exchange()->paginate(3),
             'change' => false,
             'isEmployer' => $isEmployer
         ]);
@@ -87,8 +87,7 @@ class OrderController extends Controller
         Order::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'employer_id' => $request->user()->id,
-            'accept' => false
+            'employer_id' => $request->user()->id
         ]);
         //$order->employer->attach($request->user());
         return redirect()->route('order.my');
@@ -107,13 +106,17 @@ class OrderController extends Controller
             if (!$this->users->isEmp($request->user())) {
                 $isApply = true;
                 $apps = $order->applications;
-                if($apps) 
+                if ($apps) {
+                    //$apps = $apps->pluck('freelancer_id');
+                    if ($apps->contains('freelancer_id', $request->user()->id)) $isApply = false;
+                }
+                /*if($apps) 
                     foreach ($apps as $app) {
                         if ($app->freelancer->id == $request->user()->id) {
                             $isApply = false;
                             break;
                         }
-                    }
+                    }*/
                 if ($order->freelancer == $request->user()) $isApply = false;
             }
         }
@@ -169,10 +172,6 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $apps = $order->applications;
-        foreach ($apps as $app) {
-            $app->delete();
-        }
         /*if (Gate::allows('delete-order', $order)) {*/
             $order->delete();
             return redirect()->route('order.my');

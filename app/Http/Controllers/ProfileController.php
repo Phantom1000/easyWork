@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\User;
@@ -20,26 +21,34 @@ class ProfileController extends Controller
 
     public function index() {
         $emp = Cache::remember('roles.employer', now()->addHours(2), function() {
-            return Role::where('title', 'Работодатель')->first();
+            return Role::getEmployer();
         });
         $free = Cache::remember('roles.freelancer', now()->addHours(2), function() {
-            return Role::where('title', 'Фрилансер')->first();
+            return Role::getFreelancer();
         });
 
         //dd($emp);
-        $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function () use($free) {
+        $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function() use($free) {
             return $free->users->count();
         });
 
-        $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function () use ($emp) {
+        $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function() use($emp) {
             return $emp->users->count();
+        });
+
+        $ordersCount = Cache::remember('orders.count', now()->addSeconds(10), function () {
+            return Order::exchange()->count();
+        });
+
+        $worksCount = Cache::remember('works.count', now()->addSeconds(10), function () {
+            return Order::where('finish', true)->count();
         });
 
         return view('index', [
             'freelancersCount' => $freelancersCount,
-            'employersCount' => $employersCount
-            /*'ordersCount' => $ordersCount,
-            'worksCount' => $worksCount*/
+            'employersCount' => $employersCount,
+            'ordersCount' => $ordersCount,
+            'worksCount' => $worksCount
         ]);
     }
 

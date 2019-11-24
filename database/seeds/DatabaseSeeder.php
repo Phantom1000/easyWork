@@ -14,12 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(
+        $this->call(UsersTableSeeder::class);
+        /*Role::create(
             ['title' => 'Работодатель'],
         );
 
         Role::create(
             ['title' => 'Фрилансер'],
-        );
+        );*/
     }
 }

@@ -15,11 +15,12 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('order_id');
-            $table->integer('freelancer_id');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->unsignedBigInteger('freelancer_id');
+            $table->foreign('freelancer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('reject')->default(false);
             $table->timestamps();
-            $table->index('order_id');
-            $table->index('freelancer_id');
         });
     }
 
@@ -30,6 +31,10 @@ class CreateApplicationsTable extends Migration
      */
     public function down()
     {
+        Schema::table('applications', function (Blueprint $table) {
+            $table->dropForeign(['order_id']);
+            $table->dropForeign(['freelancer_id']);
+        });
         Schema::dropIfExists('applications');
     }
 }

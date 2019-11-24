@@ -19,12 +19,12 @@ class OrderRepository
     }*/
 
     public function forEmployer(User $user) {
-        return Order::where('employer_id', $user->id)->get();
+        return Order::where('employer_id', $user->id)->paginate(3);
     }
 
     public function forFreelancer(User $user)
     {
-        return Order::where('freelancer_id', $user->id)->get();
+        return Order::where('freelancer_id', $user->id)->paginate(3);
     }
 
     public function applications() {

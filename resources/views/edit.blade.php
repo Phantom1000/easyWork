@@ -12,7 +12,7 @@
                     <input type="file" class="col-lg-12 form-control-file" name="avatar" />
                     <div class="row">
                         <div class="col-lg-12 teext">
-                            <h2>{{ $name }} о себе</h2>
+                            <h2>{{ $name ?? '' }} о себе</h2>
                             <div class="row">
                                 <textarea name="short_description" id="short_description" cols="30" rows="10" class="col-lg-12  form-control">{{ $short_description }}</textarea>
                             </div>

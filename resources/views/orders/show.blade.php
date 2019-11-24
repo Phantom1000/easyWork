@@ -7,12 +7,12 @@
     	<div class="container">
 	    	<div class="row test11">
 				<div class="col-lg-12 ">
-	        		<h2>{{ $order->title }}</h2>
+	        		<h2>{{ $order->title ?? '' }}</h2>
 	        	</div>
 	        </div>
 	        
 	        <div class="row desk">
-	        	<p class="col-lg-12">{{ $order->description }}</p>
+	        	<p class="col-lg-12">{{ $order->description ?? '' }}</p>
 			</div>
 			<div class="row">
 				@if ($isApply)
@@ -22,7 +22,7 @@
 	        <div class="row fint">
 	        	<div class="col-lg-12">
 	        		<span>Заказчик:  </span>
-	        		<a style="color:red" href="{{ route('profile.show', $employer) }}">{{ $employer->name }}</a>
+	        		<a style="color:red" href="{{ route('profile.show', $employer) }}">{{ $employer->name ?? '' }}</a>
 	        	</div>
 	        </div>
     	</div>
