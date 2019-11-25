@@ -26,7 +26,7 @@ button{
     border: 2px solid;
     border-radius: 10px;
     transition: 0.2s;
-    width: 200px;
+    /* width: 200px; */
 }
 
 button:hover{
@@ -63,7 +63,7 @@ ul li{
 ul li a{
 	color: black;
 	display: block;
-	height: 60px;
+	/* height: 60px; */
 	line-height: 60px;
 	padding:0 60px;
 }
@@ -446,4 +446,68 @@ input{
 
 .ri{
 	text-align: right;
+}
+
+.page-link {
+    color: #000;
+    border: 1px solid #000;
+}
+
+.page-item.active .page-link {
+    color: #000;
+    background-color: #e8e8e8;
+    border-color: #000;
+}
+
+.test12{
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	border-radius: 10px;
+	background: #e8e8e8;
+	margin-bottom: 30px;
+	padding-left: 30px;
+}
+
+
+.rating-area {
+	overflow: hidden;
+	width: 265px;
+	margin: 0 auto;
+	text-align: center;
+}
+.rating-area:not(:checked) > input {
+	display: none;
+}
+.rating-area:not(:checked) > label {
+	float: right;
+	width: 42px;
+	padding: 0;
+	cursor: pointer;
+	font-size: 50px;
+	line-height: 50px;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+	content: '★';
+}
+.rating-area > input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+	color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+	position: relative;
 }

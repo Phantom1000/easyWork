@@ -48,9 +48,9 @@
 					</span>
 				</div>
 				<div class="col-lg-3">
-					<h3>12</h3> <br>
+					<h3>13 лет</h3> <br>
 					<span>
-						ДОСТИЖЕНИЙ
+						Мы развиваем рынок фриланса в России
 					</span>
 				</div>
 			</div>
@@ -86,9 +86,9 @@
 					</span>
 				</div>
 				<div class="col-lg-3">
-					<h3>576</h3> <br>
+					<h3>Гарантируем</h3> <br>
 					<span>
-						ЧАСОВ
+						Безопасность работы над проектами
 					</span>
 				</div>
 			</div>			
@@ -98,6 +98,8 @@
 				</div>
 			</div>
 		</div>
+		
+
 	</section>
 	
 	@include('layouts.footer')

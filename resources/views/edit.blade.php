@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+f@extends('layouts.layout')
 @section('title', 'Редактирование профиля')
 @section('content')
     @include('layouts.header')
