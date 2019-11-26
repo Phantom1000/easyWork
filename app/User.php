@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Application', 'App\Order', 'employer_id', 'order_id')->orderBy('created_at', 'desc');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'freelancer_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'name';

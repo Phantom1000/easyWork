@@ -101,30 +101,33 @@ class OrderController extends Controller
      */
     public function show(Request $request, Order $order)
     {
-        $isApply = false;
-        if (Auth::check()) {
-            if (!$this->users->isEmp($request->user())) {
-                $isApply = true;
-                $apps = $order->applications;
-                if ($apps) {
-                    //$apps = $apps->pluck('freelancer_id');
-                    if ($apps->contains('freelancer_id', $request->user()->id)) $isApply = false;
+        if (!$order->finish) {
+            $isApply = false;
+            if (Auth::check()) {
+                if (!$this->users->isEmp($request->user())) {
+                    $isApply = true;
+                    $apps = $order->applications;
+                    if ($apps) {
+                        //$apps = $apps->pluck('freelancer_id');
+                        if ($apps->contains('freelancer_id', $request->user()->id)) $isApply = false;
+                    }
+                    /*if($apps) 
+                        foreach ($apps as $app) {
+                            if ($app->freelancer->id == $request->user()->id) {
+                                $isApply = false;
+                                break;
+                            }
+                        }*/
+                    if ($order->freelancer == $request->user()) $isApply = false;
                 }
-                /*if($apps) 
-                    foreach ($apps as $app) {
-                        if ($app->freelancer->id == $request->user()->id) {
-                            $isApply = false;
-                            break;
-                        }
-                    }*/
-                if ($order->freelancer == $request->user()) $isApply = false;
             }
+            return view('orders.show', [
+                'order' => $order,
+                'employer' => $order->employer,
+                'isApply' => $isApply
+            ]);
         }
-        return view('orders.show', [
-            'order' => $order,
-            'employer' => $order->employer,
-            'isApply' => $isApply
-        ]);
+        abort('403');
     }
 
     /**

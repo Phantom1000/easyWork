@@ -11,6 +11,7 @@
 				</div>
 				<div class="col-lg-8 teext">
 					<h2>{{ $name ?? '' }}</h2><br>
+					<h3>Среднняя оценка от работодателей: {{ $avg ?? '' }}</h3>
 					<span>{{ $short_description ?? '' }}</span>
 					<br>
 					@can('update', $user)
@@ -28,14 +29,14 @@
 				<div class="row desk">
 					<div class="comments">
 						<h3>Оценки от заказчиков:</h3> <br>
-						<div class="one">
-							<span></span>
-							<span></span>
-						</div>
-						<div class="one">
-							<span></span>
-							<span></span>
-						</div>
+						@foreach ($comments as $comment)
+							<div class="one">
+								<span>Заказчик <a href="{{ route('profile.show', $comment->order->employer) }}" style="color:red">{{ $comment->order->employer->name ?? '' }}</a></span>
+								<span>Оценка {{ $comment->rating ?? '' }}</span>
+								<span>Комментарий {{ $comment->description ?? '' }}</span>
+							</div>			
+						@endforeach
+						{{ $comments->links() }}
 					</div>
 				</div>
 			@endif

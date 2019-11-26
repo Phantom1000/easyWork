@@ -59,7 +59,9 @@ class ProfileController extends Controller
             'short_description' => $user->short_description,
             'description' => $user->description,
             'avatar' => $user->avatar,
-            'isEmployer' => $user->roles->contains(Role::getEmployer())
+            'isEmployer' => $user->roles->contains(Role::getEmployer()),
+            'comments' => $user->comments()->paginate(5),
+            'avg' => $user->comments()->pluck('rating')->avg()
         ]);
     }
 

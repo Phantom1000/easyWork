@@ -31,7 +31,8 @@
 									<a href="{{ route('order.edit', $order) }}" style="color:black; padding-right: 20px; ">Редактировать</a>
 									Статус: 
 									@if ($order->finish)
-										Выполнено<a href="#">Оценить фрилансера</a>
+										Выполнено @if (!$order->comment)<a id="get" href="{{ route('comment.create', $order) }}">Оценить</a>@endif
+											
 									@elseif($order->accept)
 										В разработке
 									@else

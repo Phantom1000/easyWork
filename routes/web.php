@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', 'ProfileController@index')->name('index');
 
 Auth::routes();
@@ -34,8 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/application/{application}', 'ApplicationController@accept')->name('application.accept');
     Route::put('/application/{application}', 'ApplicationController@reject')->name('application.reject');
     Route::delete('/application/{application}', 'ApplicationController@destroy')->name('application.destroy');
+
+    Route::get('/comment/{order}/create', 'CommentController@create')->name('comment.create');
+    Route::post('/comment/{order}', 'CommentController@store')->name('comment.store');
 });
-
 Route::get('/order/{order}', 'OrderController@show')->name('order.show');
-
 Route::get('/profile/{user}', 'ProfileController@show')->name('profile.show');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'title', 'description', 'employer_id', 'freelancer_id', 'accept'
+        'title', 'description', 'employer_id', 'freelancer_id', 'accept', 'finish'
     ];
 
     public function employer() {
@@ -26,5 +26,10 @@ class Order extends Model
     public function scopeExchange($query)
     {
         $query->where('accept', false)->orderBy('created_at', 'desc');
+    }
+
+    public function comment()
+    {
+        return $this->hasOne('App\Comment');
     }
 }

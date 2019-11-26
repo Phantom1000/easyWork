@@ -17,8 +17,10 @@ class CreateRoleUserTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->index('role_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->index('user_id');
         });
     }
 
@@ -31,7 +33,9 @@ class CreateRoleUserTable extends Migration
     {
         Schema::table('role_user', function (Blueprint $table) {
             $table->dropForeign(['role_id']);
+            $table->dropIndex(['role_id']);
             $table->dropForeign(['user_id']);
+            $table->dropIndex(['user_id']);
         });
         Schema::dropIfExists('role_user');
     }

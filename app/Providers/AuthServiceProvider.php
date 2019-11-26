@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use App\Order;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('create-order', function ($user) {
             return ($user->roles->where('title', 'Работодатель')->first() != null);
+        });
+
+        Gate::define('create-comment', function ($user, Order $order) {
+            return ($order->employer() == $user && ($user->roles->where('title', 'Работодатель')->first() != null) && $order->finish);
         });
 
         Gate::define('delete-order', function ($user, $order) {
