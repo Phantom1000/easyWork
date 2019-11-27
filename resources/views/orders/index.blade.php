@@ -38,11 +38,13 @@
 									@else
 										В ожидании заявки
 									@endif						
-									<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
-										@csrf
-										@method('DELETE')
-										<button type="submit"> Удалить</button>
-									</form>
+									@if (!$order->finish)
+										<form action="{{ route('order.destroy', $order) }}" onsubmit="if(confirm('Удалить?')){ return true } else { return false}" method="POST">
+											@csrf
+											@method('DELETE')
+											<button type="submit"> Удалить</button>
+										</form>
+									@endif
 								@else
 									@if (!$order->finish)
 										<form action="{{ route('order.finish', $order) }}" method="POST">
