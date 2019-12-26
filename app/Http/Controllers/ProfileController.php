@@ -20,20 +20,13 @@ class ProfileController extends Controller
     }
 
     public function index() {
-        $emp = Cache::remember('roles.employer', now()->addHours(2), function() {
-            return Role::getEmployer();
-        });
-        $free = Cache::remember('roles.freelancer', now()->addHours(2), function() {
-            return Role::getFreelancer();
-        });
-
         //dd($emp);
-        $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function() use($free) {
-            return $free->users->count();
+        $freelancersCount = Cache::remember('freelancers.count', now()->addSeconds(10), function() {
+            return Role::getEmployer()->users->count();
         });
 
-        $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function() use($emp) {
-            return $emp->users->count();
+        $employersCount = Cache::remember('employers.count', now()->addSeconds(10), function() {
+            return Role::getFreelancer()->users->count();
         });
 
         $ordersCount = Cache::remember('orders.count', now()->addSeconds(10), function () {
